@@ -100,3 +100,32 @@ document.addEventListener('mousedown', (e) => {
     document.body.appendChild(fav);
     setTimeout(() => fav.remove(), 1500);
 });
+
+let isDragging = false;
+
+progressArea.addEventListener('mousedown', () => {
+    isDragging = true;
+    document.body.classList.add('hide-cursor');
+});
+
+document.addEventListener('mouseup', () => {
+    if (isDragging) {
+        isDragging = false;
+        document.body.classList.remove('hide-cursor');
+    }
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        const width = progressArea.clientWidth;
+        const rect = progressArea.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        
+        if (x < 0) x = 0;
+        if (x > width) x = width;
+        
+        const pct = (x / width) * 100;
+        progressBar.style.width = pct + "%";
+        audio.currentTime = (x / width) * audio.duration;
+    }
+});
