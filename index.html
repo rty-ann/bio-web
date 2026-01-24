@@ -6,79 +6,51 @@
     <title>rty's bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="ico/favicon.png">
 </head>
 <body>
     <div class="custom-cursor"></div>
-    <div class="bg-visual">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-    </div>
-
+    <div class="bg-visual"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
     <div class="lang-dropdown" id="lang-dropdown">
-        <div class="lang-current" onclick="toggleLangMenu()">
-            <i class="fas fa-language"></i>
-            <span id="current-lang-label">Русский</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </div>
+        <div class="lang-current" onclick="window.toggleLangMenu(event)"><i class="fas fa-language"></i><span id="current-lang-label">Русский</span><i class="fas fa-chevron-down arrow"></i></div>
         <div class="lang-list" id="lang-list">
-            <div class="lang-option" onclick="changeLang('ru')"><span>🇷🇺</span> Русский</div>
-            <div class="lang-option" onclick="changeLang('be')"><span>🇧🇾</span> Беларуская</div>
-            <div class="lang-option" onclick="changeLang('uk')"><span>🇺🇦</span> Українська</div>
-            <div class="lang-option" onclick="changeLang('en')"><span>🇺🇸</span> English</div>
+            <div class="lang-option" onclick="window.changeLang('ru')"><span>🇷🇺</span> Русский</div>
+            <div class="lang-option" onclick="window.changeLang('be')"><span>🇧🇾</span> Беларуская</div>
+            <div class="lang-option" onclick="window.changeLang('uk')"><span>🇺🇦</span> Українська</div>
+            <div class="lang-option" onclick="window.changeLang('en')"><span>🇺🇸</span> English</div>
         </div>
     </div>
-
     <div class="scroll-wrapper" id="content-root">
         <section class="screen-section">
             <div class="main-layout">
                 <div class="side-panel bio-card">
-                    <div class="avatar"></div>
-                    <h1 class="name-text">rtyann</h1>
-                    <p class="tagline" data-i18n="tagline">течтокер наху</p>
+                    <div class="avatar"></div><h1 class="name-text">rtyann</h1><p class="tagline" data-i18n="tagline">течтокер наху</p>
                     <nav class="links">
-                        <a href="https://www.tiktok.com/@rtyann_" target="_blank" class="link-item tt"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://t.me/rty_sq" target="_blank" class="link-item tg"><i class="fab fa-telegram"></i></a>
-                        <a href="https://github.com/rty-ann" target="_blank" class="link-item gh"><i class="fab fa-github"></i></a>
+                        <a href="https://www.tiktok.com/@rtyann_" target="_blank" class="link-item tiktok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://t.me/rty_sq" target="_blank" class="link-item telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://github.com/rty-ann" target="_blank" class="link-item github"><i class="fab fa-github"></i></a>
                     </nav>
                 </div>
-
                 <div class="side-panel player-card">
-                    <div class="album-art">
-                        <img src="" id="track-art" alt="Cover">
-                    </div>
-                    <div class="player-info">
-                        <h2 id="track-name">Track Name</h2>
-                        <p id="track-artist">Artist</p>
-                    </div>
-                    <div class="progress-container" id="progress-area">
-                        <div class="progress-bar" id="progress-bar">
-                            <div class="progress-dot"></div>
+                    <div class="album-art"><img src="" id="track-art" alt="Cover"></div>
+                    <div class="player-info"><h2 id="track-name">Track Name</h2><p id="track-artist">Artist</p></div>
+                    <div class="progress-container" id="progress-area"><div class="progress-bar" id="progress-bar"><div class="progress-dot"></div></div></div>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span> / <span id="duration">0:00</span>
                         </div>
-                    </div>
                     <div class="controls">
                         <button id="prev"><i class="fas fa-step-backward"></i></button>
                         <button id="play-pause" class="play-btn"><i class="fas fa-play"></i></button>
                         <button id="next"><i class="fas fa-step-forward"></i></button>
                     </div>
+                    <audio id="main-audio"></audio>
+                    <div class="volume-control"><i class="fas fa-volume-up"></i><input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5"></div>
                 </div>
             </div>
-            <div class="scroll-hint">
-                <span data-i18n="scroll">Листай вниз</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
+            <div class="scroll-hint"><span data-i18n="scroll">Листай вниз</span><i class="fas fa-chevron-down"></i></div>
         </section>
-
-        <section class="screen-section">
-            <div class="about-me-container">
-                <div class="about-me-content">
-                    <h2 data-i18n="about_title">Версия 0.6</h2>
-                    <p data-i18n="about_text">создание сайта ещё в процессе.</p>
-                </div>
-            </div>
-        </section>
-        <footer class="footer">
-            <p>&copy; rtyann. All Rights Reserved. 2026</p>
-        </footer>
+        <section class="screen-section"><div class="about-me-container"><div class="about-me-content"><h2 data-i18n="about_title">Версия 0.6</h2><p data-i18n="about_text">создание сайта ещё в процессе.</p></div></div></section>
+        <footer class="footer"><p>&copy; rtyann. All Rights Reserved. 2026</p></footer>
     </div>
     <script src="script.js"></script>
 </body>
