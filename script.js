@@ -4,128 +4,66 @@ const translations = {
     uk: { label: "Українська", tagline: "течтокер", scroll: "Гортай вниз", about_title: "версія 0.6", about_text: "створення сайту ще у процесі." },
     en: { label: "English", tagline: "techtoker", scroll: "Scroll down", about_title: "version 0.6", about_text: "make in progress." }
 };
-
-function toggleLangMenu() { document.getElementById('lang-dropdown').classList.toggle('open'); }
-
-function changeLang(lang) {
-    const root = document.getElementById('content-root');
-    const label = document.getElementById('current-lang-label');
-    document.getElementById('lang-dropdown').classList.remove('open');
-    root.classList.add('reborn-active');
-    setTimeout(() => {
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[lang][key]) el.innerText = translations[lang][key];
-        });
-        label.innerText = translations[lang].label;
-        localStorage.setItem('selectedLang', lang);
-        root.classList.remove('reborn-active');
-    }, 400);
-}
-
-const audio = new Audio();
-const trackArt = document.getElementById('track-art');
-const playPauseBtn = document.getElementById('play-pause');
-const progressBar = document.getElementById('progress-bar');
-const progressArea = document.getElementById('progress-area');
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-
+var audio = document.getElementById('main-audio');
+const playPauseBtn = document.getElementById('play-pause'), trackArt = document.getElementById('track-art'), trackName = document.getElementById('track-name'), trackArtist = document.getElementById('track-artist'), progressBar = document.getElementById('progress-bar'), progressArea = document.querySelector('.progress-container');
 const tracks = [
     { name: "Yes Future!", artist: "Noize MC", src: "audio/yesfuture.mp3", art: "covers/2012.png" },
     { name: "На Марсе классно!", artist: "Noize MC", src: "audio/mars.mp3", art: "covers/2010.png" },
-    { name: "Вояджер-1", artist: "Noize MC", src: "audio/voyager.mp3", art: "covers/2020.png"}
+    { name: "Вояджер-1", artist: "Noize MC", src: "audio/voyager.mp3", art: "covers/2020.png" }
 ];
-
-let index = 0;
-let playing = false;
-
-function load(idx) {
-    const t = tracks[idx];
-    document.getElementById('track-name').innerText = t.name;
-    document.getElementById('track-artist').innerText = t.artist;
-    trackArt.src = t.art;
-    audio.src = t.src;
-}
-
-load(index);
-
+let trackIndex = 0, isPlaying = false, isDragging = false;
+function loadTrack(idx) { const t = tracks[idx]; trackName.innerText = t.name; trackArtist.innerText = t.artist; trackArt.src = t.art; audio.src = t.src; }
+loadTrack(trackIndex);
+const formatTime = (s) => { if (!s) return "0:00"; const m = Math.floor(s/60), sec = Math.floor(s%60); return `${m}:${sec<10?'0':''}${sec}`; };
 playPauseBtn.onclick = () => {
-    if (playing) { audio.pause(); playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; }
+    if (isPlaying) { audio.pause(); playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; } 
     else { audio.play(); playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
-    playing = !playing;
+    isPlaying = !isPlaying;
 };
-
-nextBtn.onclick = () => {
-    trackArt.style.opacity = '0';
-    setTimeout(() => {
-        index = (index + 1) % tracks.length; load(index);
-        trackArt.style.opacity = '1';
-        if (playing) audio.play();
-    }, 250);
-};
-
-prevBtn.onclick = () => {
-    trackArt.style.opacity = '0';
-    setTimeout(() => {
-        index = (index - 1 + tracks.length) % tracks.length; load(index);
-        trackArt.style.opacity = '1';
-        if (playing) audio.play();
-    }, 250);
-};
-
+document.getElementById('next').onclick = () => { trackIndex = (trackIndex + 1) % tracks.length; loadTrack(trackIndex); if (isPlaying) audio.play(); };
+document.getElementById('prev').onclick = () => { trackIndex = (trackIndex - 1 + tracks.length) % tracks.length; loadTrack(trackIndex); if (isPlaying) audio.play(); };
+audio.onended = () => { document.getElementById('next').click(); };
+audio.onloadedmetadata = () => { document.getElementById('duration').innerText = formatTime(audio.duration); };
 audio.ontimeupdate = () => {
-    const pct = (audio.currentTime / audio.duration) * 100;
-    progressBar.style.width = pct + "%";
+    if (!isDragging && audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${pct}%`;
+        document.getElementById('current-time').innerText = formatTime(audio.currentTime);
+        document.getElementById('duration').innerText = formatTime(audio.duration);
+    }
 };
-
-progressArea.onclick = (e) => {
-    const width = progressArea.clientWidth;
-    const clickX = e.offsetX;
-    audio.currentTime = (clickX / width) * audio.duration;
+const updateProgress = (e) => {
+    const w = progressArea.clientWidth, rect = progressArea.getBoundingClientRect();
+    const x = e.clientX - rect.left, pct = Math.max(0, Math.min(x / w, 1));
+    progressBar.style.width = `${pct * 100}%`;
+    if (audio.duration) audio.currentTime = pct * audio.duration;
 };
-
+progressArea.addEventListener('mousedown', (e) => { isDragging = true; document.body.classList.add('hide-cursor'); updateProgress(e); });
+document.addEventListener('mousemove', (e) => { if (isDragging) updateProgress(e); });
+document.addEventListener('mouseup', () => { if (isDragging) { isDragging = false; document.body.classList.remove('hide-cursor'); } });
+window.toggleLangMenu = (e) => { if (e) e.stopPropagation(); const d = document.getElementById('lang-dropdown'); d.classList.toggle('open'); };
+window.changeLang = (lang) => { 
+    const r = document.getElementById('content-root'), l = document.getElementById('current-lang-label'); 
+    document.getElementById('lang-dropdown').classList.remove('open'); r.classList.add('reborn-active'); localStorage.setItem('user_lang', lang);
+    setTimeout(() => { 
+        document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (translations[lang][k]) el.innerText = translations[lang][k]; }); 
+        l.innerText = translations[lang].label; r.classList.remove('reborn-active'); 
+    }, 400); 
+};
+(function initLang() {
+    const saved = localStorage.getItem('user_lang') || 'en', label = document.getElementById('current-lang-label');
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (translations[saved][k]) el.innerText = translations[saved][k]; });
+    if (label) label.innerText = translations[saved].label;
+})();
+document.addEventListener('click', (e) => { const d = document.getElementById('lang-dropdown'); if (d && !d.contains(e.target)) d.classList.remove('open'); });
 const cursor = document.querySelector('.custom-cursor');
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
+document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
 document.addEventListener('mousedown', (e) => {
-    const fav = document.createElement('div');
-    fav.className = 'falling-avatar';
-    fav.style.left = e.clientX - 20 + 'px';
-    fav.style.top = e.clientY - 20 + 'px';
-    document.body.appendChild(fav);
-    setTimeout(() => fav.remove(), 1500);
+    const fav = document.createElement('div'); fav.className = 'falling-avatar';
+    fav.style.left = (e.clientX - 20) + 'px'; fav.style.top = (e.clientY - 20) + 'px';
+    document.body.appendChild(fav); setTimeout(() => fav.remove(), 1500);
 });
-
-let isDragging = false;
-
-progressArea.addEventListener('mousedown', () => {
-    isDragging = true;
-    document.body.classList.add('hide-cursor');
-});
-
-document.addEventListener('mouseup', () => {
-    if (isDragging) {
-        isDragging = false;
-        document.body.classList.remove('hide-cursor');
-    }
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-        const width = progressArea.clientWidth;
-        const rect = progressArea.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        
-        if (x < 0) x = 0;
-        if (x > width) x = width;
-        
-        const pct = (x / width) * 100;
-        progressBar.style.width = pct + "%";
-        audio.currentTime = (x / width) * audio.duration;
-    }
-});
+(function() {
+    const s = document.querySelector('.volume-slider'), i = document.querySelector('.volume-control i');
+    if (audio && s) { audio.volume = s.value; s.oninput = (e) => { audio.volume = e.target.value; if (i) i.className = audio.volume == 0 ? 'fas fa-volume-mute' : audio.volume < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up'; }; }
+})();
