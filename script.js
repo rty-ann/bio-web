@@ -1,9 +1,34 @@
 const translations = {
-    ru: { label: "Русский", tagline: "течтокер наху", scroll: "Листай вниз", about_title: "версия 0.6", about_text: "создание сайта ещё в процессе." },
-    be: { label: "Беларуская", tagline: "тэчтокер", scroll: "Гартай ніжэй", about_title: "версія 0.6", about_text: "стварэнне сайта яшчэ ў працэсе." },
-    uk: { label: "Українська", tagline: "течтокер", scroll: "Гортай вниз", about_title: "версія 0.6", about_text: "створення сайту ще у процесі." },
-    en: { label: "English", tagline: "techtoker", scroll: "Scroll down", about_title: "version 0.6", about_text: "make in progress." }
+    ru: { label: "Русский", tagline: "течтокер", scroll: "Листай вниз", about_title: "Обо мне", about_text: "Родом из Беларуси. Течтокер и начинающий программист. Эксперт во многих эксплоитах IOS, а также в Android тематике. Пишу код на Unreal Engine и Unity, а также HTML, CSS, JS. Исследую мобильные системы изнутри.", nav_title: "Навигатор",
+        nav_ios9_title: "iOS 9",
+        nav_ios9_desc: "Мой гайд по обходу блокировки активации на iOS >= 9.3 для Linux/MacOS",
+        nav_merula_title: "turdus_merula",
+        nav_merula_desc: "Откат A9-A10 устройств на Linux/MacOS",
+        nav_legacy_title: "Legacy iOS Kit",
+        nav_legacy_desc: "Как использовать данную программу"},
+    be: { label: "Беларуская", tagline: "тэчтокер", scroll: "Гартай ніжэй", about_title: "Пра мяне", about_text: "Родам з Беларусі. Тэчтокер і пачатковец-праграміст. Эксперт у многіх эксплоітах IOS, а таксама ў Android тэматыцы. Пішу код на Unreal Engine і Unity, а таксама HTML, CSS, JS. Даследую мабільныя сістэмы знутры.", nav_title: "Навігатар",
+        nav_ios9_title: "iOS 9",
+        nav_ios9_desc: "Мой гайд па абыходзе блакіроўкі актывацыі на iOS >= 9.3 для Linux/MacOS",
+        nav_merula_title: "turdus_merula",
+        nav_merula_desc: "Адкат A9-A10 прылад на Linux/MacOS",
+        nav_legacy_title: "Legacy iOS Kit",
+        nav_legacy_desc: "Як карыстацца дадзенай праграмай"},
+    uk: { label: "Українська", tagline: "течтокер", scroll: "Гортай вниз", about_title: "Про мене", about_text: "Родом з Білорусі. Течтокер та програміст-початківець. Експерт у багатьох експлоїтах IOS, а також в Android тематиці. Пишу код на Unreal Engine та Unity, а також HTML, CSS, JS. Досліджую мобільні системи зсередини.", nav_title: "НАВІГАТОР",
+        nav_ios9_title: "iOS 9",
+        nav_ios9_desc: "Мій гайд по обходу блокування активації на iOS >= 9.3 для Linux/MacOS",
+        nav_merula_title: "turdus_merula",
+        nav_merula_desc: "Відкат A9-A10 пристроїв на Linux/MacOS",
+        nav_legacy_title: "Legacy iOS Kit",
+        nav_legacy_desc: "Як використовувати дану програму"},
+    en: { label: "English", tagline: "techtoker", scroll: "Scroll down", about_title: "About Me", about_text: "From Belarus. Techtoker and junior developer. Expert in many iOS exploits, as well as Android topics. Developing projects in Unreal Engine and Unity, also in HTML, CSS, JS. Exploring mobile internals.", nav_title: "Navigator",
+        nav_ios9_title: "iOS 9",
+        nav_ios9_desc: "My guide on bypassing activation lock on iOS >= 9.3 for Linux/MacOS",
+        nav_merula_title: "turdus_merula",
+        nav_merula_desc: "A9-A10 devices downgrade on Linux/MacOS",
+        nav_legacy_title: "Legacy iOS Kit",
+        nav_legacy_desc: "How to use this tool"}
 };
+
 var audio = document.getElementById('main-audio');
 const playPauseBtn = document.getElementById('play-pause'), trackArt = document.getElementById('track-art'), trackName = document.getElementById('track-name'), trackArtist = document.getElementById('track-artist'), progressBar = document.getElementById('progress-bar'), progressArea = document.querySelector('.progress-container');
 const tracks = [
@@ -67,3 +92,39 @@ document.addEventListener('mousedown', (e) => {
     const s = document.querySelector('.volume-slider'), i = document.querySelector('.volume-control i');
     if (audio && s) { audio.volume = s.value; s.oninput = (e) => { audio.volume = e.target.value; if (i) i.className = audio.volume == 0 ? 'fas fa-volume-mute' : audio.volume < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up'; }; }
 })();
+
+let copyClickCount = 0;
+const secretTrigger = document.getElementById('secret');
+const photoOverlay = document.getElementById('photo');
+const secretSound = document.getElementById('sound');
+
+if (secretTrigger) {
+    secretTrigger.addEventListener('click', () => {
+        copyClickCount++;
+
+        if (copyClickCount === 5) {
+            copyClickCount = 0;
+
+            photoOverlay.classList.remove('fade-out');
+            photoOverlay.classList.add('active');
+
+            if (secretSound) {
+                secretSound.currentTime = 0;
+                secretSound.volume = 1;
+                secretSound.play();
+            }
+
+            setTimeout(() => {
+                photoOverlay.classList.remove('active');
+                photoOverlay.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    if (secretSound) {
+                        secretSound.pause();
+                        secretSound.currentTime = 0;
+                    }
+                }, 800); 
+            }, 3000);
+        }
+    });
+}
