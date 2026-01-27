@@ -1,4 +1,4 @@
-# US: so, hi everyone! this is my bio, now is "naked" cuz of making in progress now, so wait some time until i add more!
+# US: so, hi everyone! this is my bio, ver 1.1 by the way. wait for new updates soon!
 
 
-# RU: всем привет! это мой "био" в виде сайта на гитхабе, пока что он "голый" из-за того, что он ещё в процессе, но вы уже можете его глянуть, так что ждите обновлений!
+# RU: всем привет! это мой "био" в виде сайта на гитхабе, сейчас на версии 1.1, но позже будет ещё больше новых обновлений!
