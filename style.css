@@ -222,32 +222,42 @@ body.hide-cursor .custom-cursor { opacity: 0 !important; }
 .progress-container:hover .progress-dot { opacity: 1; }
 
 @media (max-width: 768px) {
-    body, .scroll-wrapper { height: auto; overflow-y: auto !important; background: #030508; }
-    .screen-section { height: auto; min-height: 100vh; padding: 30px 15px; display: flex; flex-direction: column; }
-    .main-layout { flex-direction: column !important; gap: 20px; width: 100%; align-items: center; }
-    
-    .side-panel { 
-        width: 100%; 
-        max-width: 450px; 
-        padding: 30px 20px; 
-        background: rgba(255, 255, 255, 0.03) !important; 
-        backdrop-filter: blur(15px) saturate(180%) !important; 
-        -webkit-backdrop-filter: blur(15px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 25px;
+    .main-layout { 
+        display: flex !important;
+        flex-direction: column !important; 
+        gap: 30px !important; 
+        width: 100% !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding-top: 20px !important;
     }
 
-    .name-text { font-size: 2.2rem; text-align: center; }
-    .avatar { width: 90px; height: 90px; margin-bottom: 15px; }
-    .album-art { width: 100%; max-width: 220px; height: 220px; border-radius: 20px; }
-    
-    .controls { gap: 15px; width: 100%; justify-content: center; }
-    .play-btn { width: 50px; height: 50px; font-size: 1.2rem; }
-    
-    .custom-cursor { display: none !important; }
-    * { cursor: auto !important; }
+    .profile-card { 
+        order: 1 !important; 
+        width: 90% !important;
+        max-width: 400px !important;
+    }
 
-    .blob { filter: blur(50px); opacity: 0.4; }
+    .music-player { 
+        order: 2 !important; 
+        width: 90% !important;
+        max-width: 400px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .screen-section {
+        height: auto !important;
+        min-height: 100vh;
+        overflow-y: auto !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .about-me-content { 
+        width: 85% !important;
+        max-width: 350px !important;
+        margin: 20px auto !important;
+    }
 }
 
 .nav-container { width: 100%; max-width: 900px; padding: 20px; text-align: center; }
@@ -293,4 +303,131 @@ body.hide-cursor .custom-cursor { opacity: 0 !important; }
 @keyframes fadeAway {
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0.9); visibility: hidden; }
+}
+
+.profile-card, .music-player, .about-me-content, .nav-card {
+    position: relative;
+    background: var(--card-bg);
+    z-index: 1;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.profile-card, .music-player, .about-me-content, .nav-card {
+    position: relative;
+    background: var(--card-bg);
+    z-index: 1;
+    overflow: visible !important;
+    transition: transform 0.4s ease;
+    border: 1px solid var(--glass-border);
+}
+
+.profile-card::before, .music-player::before, .about-me-content::before, .nav-card::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #020b14, #003366, #050505, #001f3f);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    border-radius: inherit;
+    animation: gradientShift 6s ease infinite;
+}
+
+.profile-card:hover::before, .music-player:hover::before, .about-me-content:hover::before, .nav-card:hover::before {
+    opacity: 1;
+    filter: blur(8px);
+}
+
+.profile-card::after, .music-player::after, .about-me-content::after, .nav-card::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, #050a0f, #004a99, #0a0a0a);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    animation: gradientShift 6s ease infinite;
+}
+
+.profile-card:hover::after, .music-player:hover::after, .about-me-content:hover::after, .nav-card:hover::after {
+    opacity: 1;
+}
+
+.profile-card:hover, .music-player:hover, .about-me-content:hover, .nav-card:hover {
+    transform: translateY(-5px);
+    border-color: transparent !important;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.nav-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    display: inline-block;
+    animation: bounceTitle 3s ease-in-out infinite;
+}
+
+@keyframes bounceTitle {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-7px);
+    }
+}
+
+.profile-card, .music-player, .about-me-content, .nav-card {
+    position: relative;
+    background: var(--card-bg);
+    z-index: 1;
+    overflow: visible !important;
+    transition: transform 0.4s ease, background 0.4s ease;
+    border: 1px solid var(--glass-border);
+}
+
+.profile-card:hover, .music-player:hover, .about-me-content:hover, .nav-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.045); 
+    border-color: rgba(0, 160, 200, 0.4) !important;
+    box-shadow: 0 0 25px rgba(0, 130, 255, 0.15);
+}
+
+.profile-card::after, .music-player::after, .about-me-content::after, .nav-card::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, #0084a3, #2a5a9d, #00a3ab);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    animation: gradientShift 5s ease infinite;
+}
+
+.profile-card:hover::after, .music-player:hover::after, .about-me-content:hover::after, .nav-card:hover::after {
+    opacity: 0.8;
 }
