@@ -32,9 +32,18 @@ const translations = {
 var audio = document.getElementById('main-audio');
 const playPauseBtn = document.getElementById('play-pause'), trackArt = document.getElementById('track-art'), trackName = document.getElementById('track-name'), trackArtist = document.getElementById('track-artist'), progressBar = document.getElementById('progress-bar'), progressArea = document.querySelector('.progress-container');
 const tracks = [
-    { name: "Yes Future!", artist: "Noize MC", src: "audio/yesfuture.mp3", art: "covers/2012.png" },
-    { name: "На Марсе классно!", artist: "Noize MC", src: "audio/mars.mp3", art: "covers/2010.png" },
-    { name: "Вояджер-1", artist: "Noize MC", src: "audio/voyager.mp3", art: "covers/2020.png" }
+    { name: "Кладбище Самолётов", artist: "Валентин Стрыкало", src: "audio/kladbischesamoletov.mp3", art: "covers/kladbischesamoletov.jpg" },
+    { name: "Yes Future!", artist: "Noize MC", src: "audio/yesfuture.mp3", art: "covers/yesfuture.png" },
+    { name: "На Марсе классно!", artist: "Noize MC", src: "audio/mars.mp3", art: "covers/namarseklassno.png" },
+    { name: "Вояджер-1", artist: "Noize MC", src: "audio/voyager.mp3", art: "covers/voyager1.png" },
+    { name: "В темноте", artist: "Noize MC", src: "audio/vtemnote.mp3", art: "covers/vtemnote.jpg" },
+    { name: "Детка, послушай", artist: "Noize MC", src: "audio/detkaposlyshay.mp3", art: "covers/detkaposlyshay.jpg" },
+    { name: "Следы на спине", artist: "Noize MC", src: "audio/sledynaspine.mp3", art: "covers/sledynaspine.jpg"},
+    { name: "Жвачка", artist: "Noize MC, Mewark (🥀)", src: "audio/zhvachka.mp3", art: "covers/zhvachka.jpg" },
+    { name: "Устрой дестрой", artist: "Noize MC, Чача", src: "audio/ystroydestroy.mp3", art: "covers/ystroydestroy.png"},
+    { name: "Иордан", artist: "Noize MC, Atlantida Project (🥀)", src: "audio/iordan.mp3", art: "covers/iordan.jpg" },
+    { name: "гори гори гори", artist: "Монеточка", src: "audio/gorigorigori.mp3", art: "covers/gorigorigori.jpg" },
+    { name: "Последняя дискотека", artist: "Монеточка", src: "audio/poslednyyadiskoteka.mp3", art: "covers/poslednyyadiskoteka.jpg"}
 ];
 let trackIndex = 0, isPlaying = false, isDragging = false;
 function loadTrack(idx) { const t = tracks[idx]; trackName.innerText = t.name; trackArtist.innerText = t.artist; trackArt.src = t.art; audio.src = t.src; }
@@ -128,3 +137,14 @@ if (secretTrigger) {
         }
     });
 }
+
+document.addEventListener('mousemove', (e) => {
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    
+    const blobs = document.querySelectorAll('.blob');
+    blobs.forEach((blob, index) => {
+        const speed = (index + 1) * 20;
+        blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
+});
