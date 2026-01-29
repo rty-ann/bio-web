@@ -41,7 +41,7 @@ This project is optimized for **GitHub Pages**.
 
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/rty-ann/bio-web.git]
+    git clone https://github.com/rty-ann/bio-web.git
     ```
 2.  Enable GitHub Pages in repository settings (Source: `main` / `root`).
 3.  Access via: `https://your-username.github.io/your-repo`
@@ -67,7 +67,7 @@ This project is optimized for **GitHub Pages**.
 
 1.  Клонируйте репозиторий:
     ```bash
-    git clone [https://github.com/rty-ann/bio-web.git]
+    git clone https://github.com/rty-ann/bio-web.git
     ```
 2.  Зайдите в настройки репозитория (Settings -> Pages).
 3.  Включите GitHub Pages (выберите ветку `main` и папку `/root`).
