@@ -148,3 +148,86 @@ document.addEventListener('mousemove', (e) => {
         blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
     });
 });
+
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const loaderBar = document.querySelector('.loader-bar');
+    const statusText = document.querySelector('.loader-status');
+    const logsContainer = document.getElementById('loader-logs');
+    
+    const systemMessages = [
+    "[DEBUG] Initiating rty_OS bootloader...",
+    "[INFO]  Checking hardware acceleration... Enabled",
+    "[DEBUG] GET /assets/style.css - 200 OK",
+    "[ERROR] RenderEngine: Failed to load 'Liquid_Glass' shader",
+    "[WARN]  UI: Filter 'backdrop-blur' is not responding",
+    "[INFO]  System: Attempting shader recompilation...",
+    "[DEBUG] Recompiling: liquid_glass_v2.glsl... [SUCCESS]",
+    "[INFO]  Liquid Glass effect mounted successfully",
+    "[DEBUG] GET /assets/voyager.mp3 - 206 Partial",
+    "[DEBUG] GET /assets/iordan.mp3 - 206 Partial",
+    "[DEBUG] GET /assets/yesfuture.mp3 - 206 Partial",
+    "[DEBUG] GET /assets/zhvachka.mp3 - 206 Partial",
+    "[ERROR] AudioContext: User interaction required for autoplay",
+    "[WARN]  Performance: High GPU usage detected!",
+    "[INFO]  Optimizing physics engine for mobile devices...",
+    "[DEBUG] i18n: Locales injected [RU, BE, UK, EN]",
+    "[ERROR] Network: Socket timeout at xx.xx.x.x",
+    "[INFO]  Retrying connection via secure tunnel...",
+    "[DEBUG] Tunnel: established 256-bit AES",
+    "[WARN]  Security: Non-critical module active",
+    "[INFO]  Finalizing DOM hydration...",
+    "[DEBUG] Assets: All assets loaded. Preparing GUI."
+    ];
+
+    function getLogClass(text) {
+        if (text.includes('[DEBUG]')) return 'log-debug';
+        if (text.includes('[INFO]'))  return 'log-info';
+        if (text.includes('[WARN]'))  return 'log-warn';
+        if (text.includes('[ERROR]')) return 'log-error';
+        return 'log-info';
+    }
+
+    function addLog(text) {
+        const entry = document.createElement('div');
+        entry.className = `log-entry ${getLogClass(text)}`;
+        entry.innerText = text;
+        logsContainer.appendChild(entry);
+        logsContainer.scrollTop = logsContainer.scrollHeight;
+        if (logsContainer.childNodes.length > 20) logsContainer.removeChild(logsContainer.firstChild);
+    }
+
+    let progress = 0;
+    let logIndex = 0;
+
+    const logInterval = setInterval(() => {
+        if (logIndex < systemMessages.length) {
+            addLog(systemMessages[logIndex]);
+            logIndex++;
+        } else {
+            clearInterval(logInterval);
+        }
+    }, 45);
+
+    const progressInterval = setInterval(() => {
+        let targetProgress = (logIndex / systemMessages.length) * 100;
+        
+        if (progress < targetProgress) {
+            progress += 1;
+        }
+
+        loaderBar.style.width = `${progress}%`;
+
+        if (progress >= 100 && logIndex >= systemMessages.length) {
+            clearInterval(progressInterval);
+            
+            statusText.innerText = "DONE!";
+            statusText.style.color = "#00ff88";
+
+            setTimeout(() => {
+                preloader.classList.add('loaded');
+                document.getElementById('content-root').style.opacity = '1';
+            }, 800);
+        }
+    }, 20);
+});
