@@ -1,6 +1,6 @@
 <div align="center">
 
-  <h1><code>rty's bio // bio-web </code></h1>
+  <h1><code>rty's bio</code></h1>
   
   <a href="https://github.com/rtyann">
     <img src="https://img.shields.io/badge/VERSION-1.2.6-00d2ff?style=for-the-badge&logo=apple&logoColor=white" alt="Version">
