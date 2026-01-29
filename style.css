@@ -431,3 +431,175 @@ body.hide-cursor .custom-cursor { opacity: 0 !important; }
 .profile-card:hover::after, .music-player:hover::after, .about-me-content:hover::after, .nav-card:hover::after {
     opacity: 0.8;
 }
+
+.verify-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.verify-badge {
+    font-size: 1.2rem;
+    color: var(--blue-accent);
+    margin-left: 8px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.5));
+    animation: simplePulse 2s ease-in-out infinite;
+}
+
+@keyframes simplePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.8));
+    }
+}
+
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: #05070a;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.8s;
+}
+
+.loader-content {
+    text-align: center;
+    width: 250px;
+}
+
+.loader-logo {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 10px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+.loader-bar-container {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--blue-accent);
+    box-shadow: 0 0 15px var(--blue-accent);
+    transition: width 0.4s ease;
+}
+
+.loader-status {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes logoPulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.side-panel, .lang-current, .lang-list, .about-me-content, .ticker-wrap {
+    -webkit-backdrop-filter: blur(25px) !important;
+    backdrop-filter: blur(25px) !important;
+}
+
+.loader-logs {
+    margin-top: 20px;
+    height: 160px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--blue-accent);
+    text-align: left;
+    overflow-y: hidden;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.log-entry {
+    margin-bottom: 5px;
+    line-height: 1.2;
+    border-left: 2px solid rgba(0, 210, 255, 0.3);
+    padding-left: 8px;
+}
+
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.log-debug { color: #00d2ff; }
+.log-info  { color: #8f99a8; }
+.log-warn  { color: #ff9900; }
+.log-error { color: #fa1d1d; }
+
+.log-entry {
+    margin-bottom: 5px;
+    line-height: 1.2;
+    border-left: 2px solid currentColor;
+    padding-left: 8px;
+    font-weight: 500;
+}
+
+.version-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.version-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(0, 210, 255, 0.08);
+    border: 1px solid rgba(0, 210, 255, 0.25);
+    border-radius: 20px;
+    
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--blue-accent);
+    
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.version-tag:hover {
+    background: rgba(0, 210, 255, 0.15);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    transform: translateY(-2px);
+    cursor: default;
+}
