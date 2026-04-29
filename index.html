@@ -1,140 +1,264 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rty's bio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>rtyann · bio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="ico/favicon.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-        <div id="preloader">
-            <div class="loader-content">
-                <h1 class="loader-logo">RTY'S BIO</h1>
-                <div class="loader-bar-container">
-                    <div class="loader-bar"></div>
-                </div>
-                <p class="loader-status">Loading...</p>
-        
-                <div class="loader-logs" id="loader-logs">
-                </div>
-            </div>
-        </div>
-    <div class="custom-cursor"></div>
-    <div class="bg-visual">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+    <div class="preloader-inner">
+        <div class="pre-glitch-name" data-text="RTY_OS">RTY_OS</div>
+        <div class="pre-bar-wrap"><div class="pre-bar" id="pre-bar"></div></div>
+        <div class="pre-status" id="pre-status">Booting...</div>
+        <div class="pre-logs" id="pre-logs"></div>
     </div>
+</div>
 
-    <div class="lang-dropdown" id="lang-dropdown">
-        <div class="lang-current" onclick="window.toggleLangMenu(event)">
-            <i class="fas fa-language"></i>
-            <span id="current-lang-label">Русский</span>
-            <i class="fas fa-chevron-down arrow"></i>
-        </div>
-        <div class="lang-list" id="lang-list">
-            <div class="lang-option" onclick="window.changeLang('ru')"><span>🇷🇺</span> Русский</div>
-            <div class="lang-option" onclick="window.changeLang('be')"><span>🇧🇾</span> Беларуская</div>
-            <div class="lang-option" onclick="window.changeLang('uk')"><span>🇺🇦</span> Українська</div>
-            <div class="lang-option" onclick="window.changeLang('en')"><span>🇺🇸</span> English</div>
-        </div>
+<!-- MESH BACKGROUND -->
+<canvas id="mesh-canvas"></canvas>
+
+<!-- SCANLINE OVERLAY -->
+<div class="scanlines"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursor-trail"></div>
+
+<!-- FLOATING LANG PILL -->
+<div class="lang-pill" id="lang-pill">
+    <button class="lang-pill-btn" onclick="window.toggleLangMenu(event)">
+        <i class="fas fa-globe"></i>
+        <span id="current-lang-label">Русский</span>
+        <i class="fas fa-chevron-down lang-arrow"></i>
+    </button>
+    <div class="lang-menu" id="lang-list">
+        <div class="lang-opt" onclick="window.changeLang('ru')"><span>🇷🇺</span> Русский</div>
+        <div class="lang-opt" onclick="window.changeLang('be')"><span>🇧🇾</span> Беларуская</div>
+        <div class="lang-opt" onclick="window.changeLang('uk')"><span>🇺🇦</span> Українська</div>
+        <div class="lang-opt" onclick="window.changeLang('en')"><span>🇺🇸</span> English</div>
     </div>
+</div>
 
-    <div class="scroll-wrapper" id="content-root">
-        <section class="screen-section">
-            <div class="main-layout">
-                <div class="side-panel bio-card">
-                    <div class="avatar"></div>
-                    <h1 class="name-text">rtyann <i class="fas fa-check-circle verify-badge"></i></h1>
-                    <p class="tagline" data-i18n="tagline">течтокер</p>
-                    <div class="version-container">
-                        <span class="version-tag">v1.2.6</span>
-                    </div>
-                    <nav class="links">
-                        <a href="https://www.tiktok.com/@rtyann_" target="_blank" class="link-item tiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://t.me/rty_sq" target="_blank" class="link-item telegram"><i class="fab fa-telegram"></i></a>
-                        <a href="https://github.com/rty-ann" target="_blank" class="link-item github"><i class="fab fa-github"></i></a>
-                    </nav>
-                </div>
+<!-- MAIN CONTENT -->
+<main id="content-root">
 
-                <div class="side-panel player-card">
-                    <div class="album-art"><img src="" id="track-art" alt="Cover"></div>
-                    <div class="player-info">
-                        <h2 id="track-name">track</h2>
-                        <p id="track-artist">artist</p>
-                    </div>
-                    <div class="progress-container" id="progress-area">
-                        <div class="progress-bar" id="progress-bar"><div class="progress-dot"></div></div>
-                    </div>
-                    <div class="time-display">
-                        <span id="current-time">0:00</span> / <span id="duration">0:00</span>
-                    </div>
-                    <div class="controls">
-                        <button id="prev"><i class="fas fa-step-backward"></i></button>
-                        <button id="play-pause" class="play-btn"><i class="fas fa-play"></i></button>
-                        <button id="next"><i class="fas fa-step-forward"></i></button>
-                    </div>
-                    <audio id="main-audio"></audio>
-                    <div class="volume-control">
-                        <i class="fas fa-volume-up"></i>
-                        <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-                    </div>
+    <!-- ═══ HERO SECTION ═══ -->
+    <section class="section hero-section reveal">
+        <div class="glass-card hero-card">
+            <!-- Avatar Ring -->
+            <div class="avatar-ring-wrap">
+                <div class="avatar-ring"></div>
+                <div class="avatar-ring ring-2"></div>
+                <div class="avatar-blob"></div>
+                <div class="avatar-inner">
+                    <img src="avatar.jpeg" alt="Avatar" class="avatar-img">
                 </div>
+                <div class="online-dot"></div>
             </div>
-            <div class="scroll-hint"><span data-i18n="scroll">Листай вниз</span><i class="fas fa-chevron-down"></i></div>
-        </section>
 
-        <section class="screen-section">
-            <div class="about-me-container">
-                <div class="about-me-content">
-                    <h2 data-i18n="about_title">Обо мне</h2>
-                    <p data-i18n="about_text"></p>
-                    <div class="ticker-wrap">
-                        <div class="ticker">
-                            <div class="ticker-item">checkm8</div><div class="ticker-item">twrp/orangefox</div>
-                            <div class="ticker-item">bookrestore</div><div class="ticker-item">root</div>
-                            <div class="ticker-item">Unreal Engine</div><div class="ticker-item">Magisk</div>
-                            <div class="ticker-item">Turdus Merula</div><div class="ticker-item">Unity</div>
-                            <div class="ticker-item">Legacy iOS Kit</div><div class="ticker-item">edl/brom</div>
-                            <div class="ticker-item">n1ghtshade</div><div class="ticker-item">iwannabrute</div>
-                            <div class="ticker-item">pwndfu</div><div class="ticker-item">qemu</div>
-                        </div>
+            <!-- Name + Badge -->
+            <div class="hero-name-wrap">
+                <h1 class="hero-name glitch-text" data-text="rtyann">rtyann</h1>
+                <span class="verified-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 12l2 2 4-4" stroke="#00f5ff" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="10" stroke="#00f5ff" stroke-width="2"/>
+                    </svg>
+                </span>
+            </div>
+
+            <!-- Handle + Copy -->
+            <div class="handle-row">
+                <span class="handle-text">@rtyann_</span>
+                <button class="copy-btn" id="copy-btn" onclick="window.copyUsername()">
+                    <i class="fas fa-copy"></i>
+                    <span class="copy-label">Copy</span>
+                    <span class="copied-tooltip">Copied! ✓</span>
+                </button>
+            </div>
+
+            <!-- Typing Bio -->
+            <p class="hero-bio" id="hero-bio">
+                <span class="bio-typed" id="bio-typed"></span><span class="bio-cursor">|</span>
+            </p>
+
+            <!-- Badges Row -->
+            <div class="badges-row">
+                <span class="badge-chip"><i class="fab fa-tiktok"></i> <span data-i18n="tagline">течтокер</span></span>
+                <span class="badge-chip"><i class="fas fa-terminal"></i> dev</span>
+                <span class="badge-chip">🇧🇾</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SYSTEM EXPLOIT CARD (DARKSWOARD) ═══ -->
+    <section class="section reveal">
+        <div class="glass-card system-alert-card tilt-card">
+            <div class="alert-header">
+                <span class="status-dot active"></span>
+            </div>
+            <h3 class="exploit-name glitch-hover" data-text="darkswoard">darkswoard</h3>
+            <p class="exploit-desc">new ios kexploit</p>
+            <div class="exploit-meta">
+                <span class="sys-label">TARGETS:</span> 
+                <span class="sys-val">17.0-26.0.1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SOCIAL LINK GRID ═══ -->
+    <section class="section reveal">
+        <h2 class="section-label"><span data-i18n="nav_links">— LINKS —</span></h2>
+        <div class="social-grid">
+
+            <a href="https://www.tiktok.com/@rtyann_" target="_blank" class="social-card tiktok-card tilt-card">
+                <div class="sc-glow"></div>
+                <div class="sc-inner">
+                    <div class="sc-icon-wrap"><i class="fab fa-tiktok sc-icon"></i></div>
+                    <div class="sc-text">
+                        <span class="sc-platform">TikTok</span>
+                        <span class="sc-handle">@rtyann_</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right sc-arrow"></i>
+                </div>
+                <div class="sc-bar tiktok-bar"></div>
+            </a>
+
+            <a href="https://t.me/rty_sq" target="_blank" class="social-card telegram-card tilt-card">
+                <div class="sc-glow"></div>
+                <div class="sc-inner">
+                    <div class="sc-icon-wrap"><i class="fab fa-telegram sc-icon"></i></div>
+                    <div class="sc-text">
+                        <span class="sc-platform">Telegram</span>
+                        <span class="sc-handle">@rty_sq</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right sc-arrow"></i>
+                </div>
+                <div class="sc-bar tg-bar"></div>
+            </a>
+
+            <a href="https://github.com/rty-ann" target="_blank" class="social-card github-card tilt-card">
+                <div class="sc-glow"></div>
+                <div class="sc-inner">
+                    <div class="sc-icon-wrap"><i class="fab fa-github sc-icon"></i></div>
+                    <div class="sc-text">
+                        <span class="sc-platform">GitHub</span>
+                        <span class="sc-handle">rty-ann</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right sc-arrow"></i>
+                </div>
+                <div class="sc-bar gh-bar"></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══ NAVIGATOR SECTION ═══ -->
+    <section class="section reveal">
+        <h2 class="section-label">— <span data-i18n="nav_title">NAVIGATOR</span> —</h2>
+        <div class="nav-list">
+
+            <!-- EU SPOOF GUIDE -->
+            <a href="https://t.me/rty_sq/143" target="_blank" class="nav-row-card reveal-child spoof-card tilt-card">
+                <div class="nrc-accent nrc-accent-special"></div>
+                <div class="nrc-content">
+                    <span class="nrc-icon"><i class="fas fa-earth-europe"></i></span>
+                    <div class="nrc-text">
+                        <h3>iOS Spoof EU Region</h3>
+                        <p>Guide for enabling Marketplaces outside the EU</p>
                     </div>
                 </div>
-            </div>
-        </section>
+                <i class="fas fa-arrow-right nrc-arrow"></i>
+            </a>
 
-        <section class="screen-section">
-            <div class="nav-container">
-                <h2 class="nav-title" data-i18n="nav_title">Навигатор</h2>
-                <div class="nav-grid">
-                    <a href="https://t.me/rty_sq/28" target="_blank" class="nav-card">
+            <a href="https://t.me/rty_sq/28" target="_blank" class="nav-row-card reveal-child tilt-card">
+                <div class="nrc-accent nrc-accent-1"></div>
+                <div class="nrc-content">
+                    <span class="nrc-num">01</span>
+                    <div class="nrc-text">
                         <h3 data-i18n="nav_ios9_title">iOS 9</h3>
-                        <p data-i18n="nav_ios9_desc">Мой гайд по обходу блокировки активации на iOS >= 9.3 для Linux/MacOS</p>
-                    </a>
-                    <a href="https://ios.cfw.guide/turdusmerula/" target="_blank" class="nav-card">
+                        <p data-i18n="nav_ios9_desc">Мой гайд по обходу блокировки активации на iOS >= 9.3</p>
+                    </div>
+                </div>
+                <i class="fas fa-arrow-right nrc-arrow"></i>
+            </a>
+
+            <a href="https://ios.cfw.guide/turdusmerula/" target="_blank" class="nav-row-card reveal-child tilt-card">
+                <div class="nrc-accent nrc-accent-2"></div>
+                <div class="nrc-content">
+                    <span class="nrc-num">02</span>
+                    <div class="nrc-text">
                         <h3 data-i18n="nav_merula_title">turdus_merula</h3>
                         <p data-i18n="nav_merula_desc">Откат A9-A10 устройств на Linux/MacOS</p>
-                    </a>
-                    <a href="https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/How-to-Use" target="_blank" class="nav-card">
+                    </div>
+                </div>
+                <i class="fas fa-arrow-right nrc-arrow"></i>
+            </a>
+
+            <a href="https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/How-to-Use" target="_blank" class="nav-row-card reveal-child tilt-card">
+                <div class="nrc-accent nrc-accent-3"></div>
+                <div class="nrc-content">
+                    <span class="nrc-num">03</span>
+                    <div class="nrc-text">
                         <h3 data-i18n="nav_legacy_title">Legacy iOS Kit</h3>
                         <p data-i18n="nav_legacy_desc">Как использовать данную программу</p>
-                    </a>
+                    </div>
+                </div>
+                <i class="fas fa-arrow-right nrc-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══ SKILLS TICKER ═══ -->
+    <section class="section reveal">
+        <div class="ticker-outer">
+            <div class="ticker-track">
+                <div class="ticker-item">darkswoard</div>
+                <div class="ticker-item">checkm8</div>
+                <div class="ticker-item">twrp / orangefox</div>
+                <div class="ticker-item">root</div>
+                <div class="ticker-item">Unreal Engine</div>
+                <div class="ticker-item">Magisk</div>
+                <div class="ticker-item">Unity</div>
+                <div class="ticker-item">edl / brom</div>
+                <div class="ticker-item">pwndfu</div>
+                <div class="ticker-item">darkswoard</div>
+                <div class="ticker-item">checkm8</div>
+                <div class="ticker-item">twrp / orangefox</div>
+                <div class="ticker-item">root</div>
+                <div class="ticker-item">Unreal Engine</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="site-footer">
+        <p class="footer-copy" id="secret">© rtyann · 2026</p>
+        
+        <!-- THE NEW BADGE -->
+        <div class="badge-container">
+            <div class="collab-pill">
+                <span class="pill-text">Made with</span>
+                <div class="pill-brands">
+                    <span class="brand-claude">Claude <img src="claude-logo.svg" class="mini-logo" alt="Claude"></span>
+                    <span class="pill-divider">&</span>
+                    <span class="brand-gemini">Gemini <img src="gemini-logo.png" class="mini-logo" alt="Gemini"></span>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <footer class="footer">
-            <p id="secret" style="cursor: pointer;">&copy; rtyann. All Rights Reserved. 2026</p>
-        </footer>
-    </div>
+        <div class="version-pill">v2.0.0</div>
+    </footer>
 
-    <div id="photo" class="photo-overlay">
-        <img src="secret/memasik.jpg" alt="Easter Egg">
-    </div>
-    <audio id="sound" src="secret/memasik.mp3"></audio>
+</main>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
