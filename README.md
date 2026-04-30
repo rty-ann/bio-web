@@ -39,11 +39,10 @@
 * **2.0.0** — пачатковы рэдызайн інтэрфейсу.
 
 ---
----
 
 <div align="center">
   <p>
-    MADE WITH 
+    made with 
     <span style="color: #D97757;"><b>Claude</b></span> 
     <img src="claude-logo.svg" width="18" style="vertical-align: middle;"> 
     <span style="color: #555;">&</span> 
