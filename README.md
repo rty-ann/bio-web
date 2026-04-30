@@ -41,9 +41,9 @@
 ---
 <div align="center">
   <p>
-    <h3>MADE WITH</h3> 
+    <p>MADE WITH</p> 
     <b>Claude</b> <img src="claude-logo.svg" width="14" vertical-align="middle"> 
-    <h3>&</h3> 
+    <p>&</p> 
     <b>Gemini</b> <img src="gemini-logo.png" width="14" vertical-align="middle">
   </p>
   <p>© rtyann · 2026</p>
