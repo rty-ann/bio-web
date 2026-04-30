@@ -216,3 +216,44 @@ body:not(.desktop) .cursor, body:not(.desktop) .cursor-trail { display: none; }
     margin: 0 3px;
     border-radius: 4px;
 }
+
+/* Состояние по умолчанию */
+.screamer-hidden {
+    display: none; /* Будет переключаться через JS */
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 999999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.8s ease; /* Плавность исчезновения */
+    pointer-events: none;
+}
+
+/* Когда активируем */
+.screamer-active {
+    display: flex !important;
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Класс для плавного ухода */
+.screamer-fade {
+    opacity: 0 !important;
+}
+
+.screamer-active img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: intense-shake 0.1s infinite;
+}
+
+@keyframes intense-shake {
+    0% { transform: translate(2px, 2px) rotate(0deg); }
+    25% { transform: translate(-2px, -2px) rotate(-1deg); }
+    50% { transform: translate(-4px, 1px) rotate(1deg); }
+    75% { transform: translate(4px, -1px) rotate(-1deg); }
+    100% { transform: translate(2px, 2px) rotate(0deg); }
+}
