@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="ico/favicon.png" alt="Logo" width="128">
+  <img src="ava.png" alt="Logo" width="128">
   <h1>rtyann</h1>
   <p>star this repo if u liked it ;3</p>
 
