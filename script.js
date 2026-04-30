@@ -4,34 +4,38 @@
 
 /* ── TRANSLATIONS ── */
 const translations = {
-  ru: { label:"Русский",   tagline:"течтокер",  scroll:"Листай вниз",  about_title:"Обо мне",
-    about_text:"Родом из Беларуси. Течтокер и начинающий программист. Эксперт во многих эксплоитах IOS, а также в Android тематике. Пишу код на Unreal Engine и Unity, а также HTML, CSS, JS. Исследую мобильные системы изнутри.",
-    nav_title:"НАВИГАТОР", nav_links:"— ССЫЛКИ —", nav_video:"ЗАКРЕПЛЁННОЕ",
-    nav_ios9_title:"iOS 9",       nav_ios9_desc:"Мой гайд по обходу блокировки активации на iOS >= 9.3 для Linux/MacOS",
+  ru: { 
+    label:"Русский", tagline:"течтокер", nav_title:"НАВИГАТОР", nav_links:"— ССЫЛКИ —",
+    nav_spoof_title: "lara iOS",
+    nav_spoof_desc: "Гайд по включению Маркетплейсов за пределами ЕС",
+    nav_ios9_title:"iOS 9", nav_ios9_desc:"Мой гайд по обходу блокировки активации на iOS >= 9.3",
     nav_merula_title:"turdus_merula", nav_merula_desc:"Откат A9-A10 устройств на Linux/MacOS",
-    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Как использовать данную программу",
-    nav_likes:"Лайки", nav_share:"Поделиться" },
-  be: { label:"Беларуская", tagline:"тэчтокер",  scroll:"Гартай ніжэй", about_title:"Пра мяне",
-    about_text:"Родам з Беларусі. Тэчтокер і пачатковец-праграміст. Эксперт у многіх эксплоітах IOS, а таксама ў Android тэматыцы. Пішу код на Unreal Engine і Unity, а таксама HTML, CSS, JS. Даследую мабільныя сістэмы знутры.",
-    nav_title:"НАВІГАТАР", nav_links:"— СПАСЫЛКІ —", nav_video:"ЗАМАЦАВАНАЕ",
-    nav_ios9_title:"iOS 9",       nav_ios9_desc:"Мой гайд па абыходзе блакіроўкі актывацыі на iOS >= 9.3 для Linux/MacOS",
+    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Как использовать данную программу"
+  },
+  be: { 
+    label:"Беларуская", tagline:"тэчтокер", nav_title:"НАВІГАТАР", nav_links:"— СПАСЫЛКІ —",
+    nav_spoof_title: "lara iOS",
+    nav_spoof_desc: "Гайд па ўключэнні Маркетплейсаў за межамі ЕС",
+    nav_ios9_title:"iOS 9", nav_ios9_desc:"Мой гайд па абыходзе блакіроўкі актывацыі на iOS >= 9.3",
     nav_merula_title:"turdus_merula", nav_merula_desc:"Адкат A9-A10 прылад на Linux/MacOS",
-    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Як карыстацца дадзенай праграмай",
-    nav_likes:"Лайкі", nav_share:"Падзяліцца" },
-  uk: { label:"Українська", tagline:"течтокер",  scroll:"Гортай вниз",  about_title:"Про мене",
-    about_text:"Родом з Білорусі. Течтокер та програміст-початківець. Експерт у багатьох експлоїтах IOS, а також в Android тематиці. Пишу код на Unreal Engine та Unity, а також HTML, CSS, JS. Досліджую мобільні системи зсередини.",
-    nav_title:"НАВІГАТАР", nav_links:"— ПОСИЛАННЯ —", nav_video:"ЗАКРІПЛЕНЕ",
-    nav_ios9_title:"iOS 9",       nav_ios9_desc:"Мій гайд по обходу блокування активації на iOS >= 9.3 для Linux/MacOS",
+    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Як карыстацца дадзенай праграмай"
+  },
+  uk: { 
+    label:"Українська", tagline:"течтокер", nav_title:"НАВІГАТАР", nav_links:"— ПОСИЛАННЯ —",
+    nav_spoof_title: "lara iOS",
+    nav_spoof_desc: "Посібник із ввімкнення Маркетплейсів за межами ЄС",
+    nav_ios9_title:"iOS 9", nav_ios9_desc:"Мій гайд по обходу блокування активації на iOS >= 9.3",
     nav_merula_title:"turdus_merula", nav_merula_desc:"Відкат A9-A10 пристроїв на Linux/MacOS",
-    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Як використовувати дану програму",
-    nav_likes:"Лайки", nav_share:"Поділитися" },
-  en: { label:"English",   tagline:"techtoker",  scroll:"Scroll down",  about_title:"About Me",
-    about_text:"From Belarus. Techtoker and junior developer. Expert in many iOS exploits, as well as Android topics. Developing projects in Unreal Engine and Unity, also in HTML, CSS, JS. Exploring mobile internals.",
-    nav_title:"NAVIGATOR", nav_links:"— LINKS —", nav_video:"PINNED",
-    nav_ios9_title:"iOS 9",       nav_ios9_desc:"My guide on bypassing activation lock on iOS >= 9.3 for Linux/MacOS",
+    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"Як використовувати дану програму"
+  },
+  en: { 
+    label:"English", tagline:"techtoker", nav_title:"NAVIGATOR", nav_links:"— LINKS —",
+    nav_spoof_title: "lara iOS",
+    nav_spoof_desc: "Guide for enabling Marketplaces outside the EU",
+    nav_ios9_title:"iOS 9", nav_ios9_desc:"My guide on bypassing activation lock on iOS >= 9.3",
     nav_merula_title:"turdus_merula", nav_merula_desc:"A9-A10 devices downgrade on Linux/MacOS",
-    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"How to use this tool",
-    nav_likes:"Likes", nav_share:"Share" }
+    nav_legacy_title:"Legacy iOS Kit", nav_legacy_desc:"How to use this tool"
+  }
 };
 
 /* ═══════════════════════════════════════════
@@ -281,3 +285,59 @@ document.querySelectorAll('.tilt-card').forEach(card => {
     card.style.transform = '';
   });
 });
+
+(function initSmoothScreamer() {
+    let clicks = 0;
+    let timer = null;
+    const trigger = document.getElementById('secret'); // Твой копирайт в футере[cite: 6]
+    const overlay = document.getElementById('meme-screamer');
+    const audio = document.getElementById('meme-sound');
+
+    if (!trigger || !overlay || !audio) return;
+
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        clicks++;
+
+        clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 1000);
+
+        if (clicks === 5) {
+            showMeme();
+            clicks = 0;
+        }
+    });
+
+    function showMeme() {
+        // Убираем класс затухания, если он остался с прошлого раза
+        overlay.classList.remove('screamer-fade');
+        overlay.classList.add('screamer-active');
+        
+        audio.currentTime = 0;
+        audio.play().catch(err => console.log("Sound blocked"));
+
+        const closeScreamer = () => {
+            // 1. Начинаем плавное затухание
+            overlay.classList.add('screamer-fade');
+            
+            // 2. Ждем завершения анимации (800мс как в CSS) и полностью скрываем
+            setTimeout(() => {
+                overlay.classList.remove('screamer-active');
+                overlay.classList.remove('screamer-fade');
+                audio.pause();
+            }, 700);
+
+            overlay.removeEventListener('click', closeScreamer);
+        };
+
+        // Закрытие по окончании звука
+        audio.onended = () => {
+            closeScreamer();
+        };
+
+        // Возможность закрыть кликом через 2 секунды после начала
+        setTimeout(() => {
+            overlay.addEventListener('click', closeScreamer);
+        }, 2000);
+    }
+})();
