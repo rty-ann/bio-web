@@ -1,76 +1,44 @@
 <div align="center">
-
-  <h1><code>rty's bio</code></h1>
-  
-  <a href="https://github.com/rtyann">
-    <img src="https://img.shields.io/badge/VERSION-1.2.6-00d2ff?style=for-the-badge&logo=apple&logoColor=white" alt="Version">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/TYPE-BIO--WEB-00d2ff?style=for-the-badge&logo=html5&logoColor=white" alt="Type">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/STATUS-STABLE-00d2ff?style=for-the-badge&logo=github-actions&logoColor=white" alt="Status">
-  </a>
-
-  <br />
-  <br />
+  <img src="ico/favicon.png" alt="Logo" width="128">
+  <h1>rtyann</h1>
+  <p>star this repo if u liked it ;3</p>
 
   <p>
-    <a href="#-english">🇺🇸 English</a> • <a href="#-русский">🇷🇺 Русский</a>
+    <img src="https://img.shields.io/badge/release-v2.0.3-blue?style=flat-square" alt="latest">
+  </p>
+
+  <p>
+    <a href="#english">english</a> • <a href="#belarusian">беларуская</a>
   </p>
 </div>
 
 ---
 
-<a id="-english"></a>
-## 🇬🇧 English
+<h2 id="english">🇺🇸 English (US)</h2>
 
-**rty's bio-web** is a highly interactive, responsive personal website designed to showcase links and projects. While it functions as a bio page, it features a custom-built preloader simulating a system boot sequence, glassmorphism UI optimized for iOS devices, and a dynamic audio player.
+### style
+* **glassmorphism** — sleek, translucent interface with liquid mesh background.
+* **interactive** — featuring advanced tilt effects and a custom OS-style preloader.[cite: 5]
+* **i18n** — native localized experience for English and Belarusian users.[cite: 5]
 
-### 🛠 Features
-
-* **💻 Terminal Preloader:** Realistic boot sequence with color-coded logs (Debug/Info/Warn/Error), simulating asset loading and shader compilation.
-* **🍎 iOS Optimization:** Full support for Safari with `-webkit-backdrop-filter` patches for perfect Glassmorphism on iPhone and iPad.
-* **🌍 Multi-language Support:** Hot-swappable locales (RU, BE, UK, EN).
-* **🎵 Audio Core:** Integrated music player with volume controls and auto-play policies.
-* **✨ Interactive Visuals**
-
-### 🚀 Deployment
-
-This project is optimized for **GitHub Pages**.
-
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/rty-ann/bio-web.git
-    ```
-2.  Enable GitHub Pages in repository settings (Source: `main` / `root`).
-3.  Access via: `https://your-username.github.io/your-repo`
+### changelog
+* **2.0.3** — bug fixes, animation improvements and README redesign.
+* **2.0.0** — initial interface redesign.
 
 ---
 
-<a id="-русский"></a>
-## 🇷🇺 Русский
+<h2 id="belarusian">🇧🇾 Беларуская</h2>
 
-**rty's bio-web** — это персональный сайт-визитка нового поколения. В отличие от стандартных link-in-bio страниц, этот проект превращает визит в мини-приключение: от «хакерской» загрузки до интерактивного интерфейса со стеклянным дизайном.
+### style
+* **glassmorphism** — гладкі напаўпразрысты інтэрфейс з аніміраваным mesh-фонам.
+* **interactive** — інтэрактыўныя эфекты нахілу і кастомны прэлоадар у стылі АС.[cite: 5]
+* **i18n** — лакалізаваны інтэрфейс для англамоўных і беларускіх карыстальнікаў.[cite: 5]
 
-### 🛠 Функционал
-
-* **💻 Терминальный Прелоадер:** Имитация загрузки ядра системы. Логи имеют цветовую кодировку (ошибки — красным, варнинги — оранжевым) и свой «сюжет» (исправление багов шейдеров на лету).
-* **🍎 Оптимизация под iOS:** Специальные патчи для Safari (`-webkit-backdrop-filter`), чтобы эффект матового стекла (Glassmorphism) идеально работал на iPhone и iPad.
-* **🌍 Мультиязычность:** Мгновенное переключение языков (RU, BE, UK, EN).
-* **🎵 Аудио-движок:** Встроенный плеер с контролем громкости и фоновой музыкой.
-* **✨ Визуальные эффекты**
-
-### 🚀 Установка и Деплой
-
-Проект полностью готов к запуску на **GitHub Pages**.
-
-1.  Клонируйте репозиторий:
-    ```bash
-    git clone https://github.com/rty-ann/bio-web.git
-    ```
-2.  Зайдите в настройки репозитория (Settings -> Pages).
-3.  Включите GitHub Pages (выберите ветку `main` и папку `/root`).
-4.  Сайт будет доступен по ссылке: `https://your-username.github.io/your-repo`
+### гісторыя змен
+* **2.0.3** — выпраўленне памылак, паляпшэнне анімацыі і рэдызайн README.
+* **2.0.0** — пачатковы рэдызайн інтэрфейсу.
 
 ---
+<div align="center">
+  <p>© rtyann · 2026</p>
+</div>
