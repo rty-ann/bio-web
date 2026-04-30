@@ -40,5 +40,11 @@
 
 ---
 <div align="center">
+  <p>
+    <code>MADE WITH</code> 
+    <b>Claude</b> <img src="claude-logo.svg" width="14" vertical-align="middle"> 
+    <code>&</code> 
+    <b>Gemini</b> <img src="gemini-logo.png" width="14" vertical-align="middle">
+  </p>
   <p>© rtyann · 2026</p>
 </div>
