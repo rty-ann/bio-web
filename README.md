@@ -18,8 +18,8 @@
 
 ### style
 * **glassmorphism** — sleek, translucent interface with liquid mesh background.
-* **interactive** — featuring advanced tilt effects and a custom OS-style preloader.[cite: 5]
-* **i18n** — native localized experience for English and Belarusian users.[cite: 5]
+* **interactive** — featuring advanced tilt effects and a custom OS-style preloader.
+* **i18n** — native localized experience for English and Belarusian users.
 
 ### changelog
 * **2.0.3** — bug fixes, animation improvements and README redesign.
@@ -31,8 +31,8 @@
 
 ### style
 * **glassmorphism** — гладкі напаўпразрысты інтэрфейс з аніміраваным mesh-фонам.
-* **interactive** — інтэрактыўныя эфекты нахілу і кастомны прэлоадар у стылі АС.[cite: 5]
-* **i18n** — лакалізаваны інтэрфейс для англамоўных і беларускіх карыстальнікаў.[cite: 5]
+* **interactive** — інтэрактыўныя эфекты нахілу і кастомны прэлоадар у стылі АС.
+* **i18n** — лакалізаваны інтэрфейс для англамоўных і беларускіх карыстальнікаў.
 
 ### гісторыя змен
 * **2.0.3** — выпраўленне памылак, паляпшэнне анімацыі і рэдызайн README.
